@@ -12,10 +12,10 @@
 
 #include <iostream>
 #include <Array.hpp>
+#include <cstdlib>
 
 #define MAX_VAL 750
 
-// static void t_exo(void);
 static void t_new_pointer_a_and_display_value(void);
 static void t_create_int_array_and_print(void);
 static void t_create_string_array_and_print(void);
@@ -25,17 +25,20 @@ static void t_create_char_array_and_operator_equal(void);
 static void t_create_int_array_and_operator_equal(void);
 static void t_out_of_range(void);
 static void t_empty_array(void);
+static int t_exo(void);
 
 int main(int, char**)
 {
-    // t_create_int_array_and_print();
-    // t_create_string_array_and_print();
-    // t_create_char_array_and_print();
-    // t_create_char_array_and_copy();
-    // t_create_char_array_and_operator_equal();
-    // t_create_int_array_and_operator_equal();
-    // t_out_of_range();
+    t_new_pointer_a_and_display_value();
+    t_create_int_array_and_print();
+    t_create_string_array_and_print();
+    t_create_char_array_and_print();
+    t_create_char_array_and_copy();
+    t_create_char_array_and_operator_equal();
+    t_create_int_array_and_operator_equal();
+    t_out_of_range();
     t_empty_array();
+    t_exo();
     return 0;
 }
 static void t_empty_array(void)
@@ -67,7 +70,6 @@ static void t_out_of_range(void)
             break ;
         }
     }
-    delete [] test.array;
 }
 
 static void t_create_int_array_and_operator_equal(void)
@@ -84,15 +86,20 @@ static void t_create_int_array_and_operator_equal(void)
     {
          std::cout << test.array[i] << std::endl;
     }
-    Array<int> copy_test;
+    Array<int> copy_test(2);
+    copy_test.array[0] = 42;
+    copy_test.array[1] = 47;
+    std::cout << "COPY ARRAY before operator equal" << std::endl;
+    for (unsigned int i = 0; i < copy_test.size(); i++)
+    {
+         std::cout << copy_test.array[i] << std::endl;
+    }
     copy_test = test;
     std::cout << "COPY ARRAY" << std::endl;
     for (unsigned int i = 0; i < copy_test.size(); i++)
     {
          std::cout << copy_test.array[i] << std::endl;
     }
-    delete [] test.array;
-    delete [] copy_test.array;
 }
 
 static void t_create_char_array_and_operator_equal(void)
@@ -116,8 +123,6 @@ static void t_create_char_array_and_operator_equal(void)
     {
          std::cout << copy_test.array[i] << std::endl;
     }
-    delete [] test.array;
-    delete [] copy_test.array;
 }
 
 static void t_create_char_array_and_copy(void)
@@ -140,8 +145,6 @@ static void t_create_char_array_and_copy(void)
     {
          std::cout << copy_test.array[i] << std::endl;
     }
-    delete [] test.array;
-    delete [] copy_test.array;
 }
 
 static void t_create_char_array_and_print(void)
@@ -157,7 +160,6 @@ static void t_create_char_array_and_print(void)
     {
          std::cout << test.array[i] << std::endl;
     }
-    delete [] test.array;
 }
 
 static void t_create_string_array_and_print(void)
@@ -169,7 +171,6 @@ static void t_create_string_array_and_print(void)
     {
          std::cout << test.array[i] << std::endl;
     }
-    delete [] test.array;
 }
 
 static void t_create_int_array_and_print(void)
@@ -181,7 +182,6 @@ static void t_create_int_array_and_print(void)
     {
          std::cout << test.array[i] << std::endl;
     }
-    delete [] test.array;
 }
 
 static void t_new_pointer_a_and_display_value(void)
@@ -193,51 +193,52 @@ static void t_new_pointer_a_and_display_value(void)
     delete a;
 }
 
-// static void t_exo(void)
-// {
-//     Array<int> numbers(MAX_VAL);
-//     int* mirror = new int[MAX_VAL];
-//     srand(time(NULL));
-//     for (int i = 0; i < MAX_VAL; i++)
-//     {
-//         const int value = rand();
-//         numbers[i] = value;
-//         mirror[i] = value;
-//     }
-//     //SCOPE
-//     {
-//         Array<int> tmp = numbers;
-//         Array<int> test(tmp);
-//     }
-//
-//     for (int i = 0; i < MAX_VAL; i++)
-//     {
-//         if (mirror[i] != numbers[i])
-//         {
-//             std::cerr << "didn't save the same value!!" << std::endl;
-//             return 1;
-//         }
-//     }
-//     try
-//     {
-//         numbers[-2] = 0;
-//     }
-//     catch(const std::exception& e)
-//     {
-//         std::cerr << e.what() << '\n';
-//     }
-//     try
-//     {
-//         numbers[MAX_VAL] = 0;
-//     }
-//     catch(const std::exception& e)
-//     {
-//         std::cerr << e.what() << '\n';
-//     }
-//
-//     for (int i = 0; i < MAX_VAL; i++)
-//     {
-//         numbers[i] = rand();
-//     }
-//     delete [] mirror;//
-// }
+static int t_exo(void)
+{
+    Array<int> numbers(MAX_VAL);
+    int* mirror = new int[MAX_VAL];
+    srand(time(NULL));
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        const int value = rand();
+        numbers[i] = value;
+        mirror[i] = value;
+    }
+    //SCOPE
+    {
+        Array<int> tmp = numbers;
+        Array<int> test(tmp);
+    }
+
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (mirror[i] != numbers[i])
+        {
+            std::cerr << "didn't save the same value!!" << std::endl;
+            return 1;
+        }
+    }
+    try
+    {
+        numbers[-2] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try
+    {
+        numbers[MAX_VAL] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        numbers[i] = rand();
+    }
+    delete [] mirror;
+    return (0);
+}

@@ -65,6 +65,7 @@ template <typename T> class Array
 		~Array(void)
 		{
 			std::cout << "Array Destructor called" << std::endl;
+			delete [] this->array;
 		}
 		Array& operator=(const Array& other)
 		{
@@ -82,7 +83,6 @@ template <typename T> class Array
 					std::cout << "Error: " << e.what() << std::endl;
 					return (*this);
 				}
-				this->len = other.len;
 				if (other.array)
 				{
 					for (unsigned int i = 0; i < other.size() ; i++)
