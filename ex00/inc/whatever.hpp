@@ -13,6 +13,8 @@
 #ifndef WHATEVER_HPP
 # define WHATEVER_HPP
 
+#include <cstdlib>
+
 template <typename t> void swap(t& ptr1, t& ptr2)
 {
 	t temp = ptr1;

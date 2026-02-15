@@ -17,8 +17,12 @@
 int main( void ) {
 
 	int a = 2;
+	int	*y = NULL;
+	int	*z = NULL;
 	int b = 3;
-	::swap( a, b );
+	*y = 2;
+	*z = 2;
+	::swap( z, y );
 	std::cout << "a = " << a << ", b = " << b << std::endl;
 	std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
 	std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;

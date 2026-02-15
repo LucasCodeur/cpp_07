@@ -6,13 +6,14 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 08:44:39 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/02/13 09:03:05 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/02/15 18:36:58 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <Array.hpp>
 #include <cstdlib>
+#include <new>
 
 #define MAX_VAL 750
 
@@ -26,21 +27,58 @@ static void t_create_int_array_and_operator_equal(void);
 static void t_out_of_range(void);
 static void t_empty_array(void);
 static int t_exo(void);
+static void t_fail_new(void);
+static void t_const_array(void);
 
 int main(int, char**)
 {
-    t_new_pointer_a_and_display_value();
-    t_create_int_array_and_print();
-    t_create_string_array_and_print();
-    t_create_char_array_and_print();
-    t_create_char_array_and_copy();
-    t_create_char_array_and_operator_equal();
-    t_create_int_array_and_operator_equal();
-    t_out_of_range();
-    t_empty_array();
-    t_exo();
+    // t_new_pointer_a_and_display_value();
+    // t_create_int_array_and_print();
+    // t_create_string_array_and_print();
+    // t_create_char_array_and_print();
+    // t_create_char_array_and_copy();
+    // t_create_char_array_and_operator_equal();
+    // t_create_int_array_and_operator_equal();
+    // t_out_of_range();
+    // t_empty_array();
+    // t_exo();
+    // t_fail_new();
+    t_const_array();
     return 0;
 }
+
+static void t_const_array(void)
+{
+    std::cout << "--------------------------------------------------------" << std::endl;
+    std::cout << "Test : t_const_array" << std::endl;
+    Array<int> test(10);
+    std::cout << "ORIGINAL ARRAY" << std::endl;
+    for (unsigned int i = 0; i < test.size(); i++)
+    {
+        test.array[i] = i;
+    }
+    const Array<int> test2(test);
+    for (unsigned int i = 0; i < test2.size(); i++)
+    {
+        std::cout << test2[0] << std::endl;
+    }
+}
+
+static void t_fail_new(void)
+{
+    std::cout << "--------------------------------------------------------" << std::endl;
+    std::cout << "Test : t_fail_new" << std::endl;
+    try
+    {
+        Array<int> test(-1);
+    }
+    catch (std::bad_alloc &e)
+    {
+		std::cout << "Error: " << e.what() << std::endl;
+        return;
+    }
+}
+
 static void t_empty_array(void)
 {
     std::cout << "--------------------------------------------------------" << std::endl;

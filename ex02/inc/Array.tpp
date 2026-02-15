@@ -6,13 +6,14 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 08:33:22 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/02/13 09:03:07 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/02/15 18:38:16 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cstring>
 #include <iostream>
 #include <exception>
+#include <new>
 
 template <typename T> class Array
 {
@@ -29,13 +30,14 @@ template <typename T> class Array
 		{
 			std::cout << "Array Unsigned int Constructor called" << std::endl;
 			try 
-			{
+			{ 
 				this->array = new T [n];
 				explicit_bzero(this->array, sizeof(T) * n);
 				this->len = n;
 			}
 			catch(std::exception &e)
 			{
+				this->array = NULL;
 				std::cout << "Error: " << e.what() << std::endl;
 				return ;
 			}
@@ -53,6 +55,7 @@ template <typename T> class Array
 				}
 				catch(std::exception &e)
 				{
+					this->array = NULL;
 					std::cout << "Error: " << e.what() << std::endl;
 					return ;
 				}
@@ -78,8 +81,9 @@ template <typename T> class Array
 					explicit_bzero(this->array, sizeof(T) * other.len);
 					this->len = other.len;
 				}
-				catch(std::exception &e)
+				catch(std::bad_alloc &e)
 				{
+					this->array = NULL;
 					std::cout << "Error: " << e.what() << std::endl;
 					return (*this);
 				}
@@ -99,8 +103,18 @@ template <typename T> class Array
 				throw std::out_of_range("Out of range");
 			return (this->array[index]);
 		}
+		const T& operator[](unsigned int index) const
+		{
+			if (index >= this->len || index < 0)	
+				throw std::out_of_range("Out of range");
+			return (this->array[index]);
+		}
 		unsigned int size(void) const
 		{
 			return (this->len);
+		}
+		void	setValue(unsigned int index, int value)
+		{
+			this->array[index] = value; 
 		}
 };
