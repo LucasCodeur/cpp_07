@@ -32,18 +32,18 @@ static void t_const_array(void);
 
 int main(int, char**)
 {
-    // t_new_pointer_a_and_display_value();
-    // t_create_int_array_and_print();
-    // t_create_string_array_and_print();
-    // t_create_char_array_and_print();
-    // t_create_char_array_and_copy();
-    // t_create_char_array_and_operator_equal();
-    // t_create_int_array_and_operator_equal();
-    // t_out_of_range();
-    // t_empty_array();
-    // t_exo();
-    // t_fail_new();
+    t_new_pointer_a_and_display_value();
+    t_create_int_array_and_print();
+    t_create_string_array_and_print();
+    t_create_char_array_and_print();
+    t_create_char_array_and_copy();
+    t_create_char_array_and_operator_equal();
+    t_create_int_array_and_operator_equal();
+    t_out_of_range();
+    t_empty_array();
+    t_exo();
     t_const_array();
+    t_fail_new();
     return 0;
 }
 

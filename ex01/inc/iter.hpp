@@ -19,8 +19,6 @@ template <typename A, typename B>
 void iter(A* array, const int length, B func)
 {
 	std::cout << "REGULAR VERSION\n";
-	if (!array || !func)
-		return ;
 	for (int i = 0; i < length; i++)
 	{
 		func(array[i]);
@@ -31,8 +29,6 @@ template <typename A, typename B>
 void iter(const A* array, const int length, const B func)
 {
 	std::cout << "CONST VERSION\n";
-	if (!array || !func)
-		return ;
 	for (int i = 0; i < length; i++)
 	{
 		func(array[i]);

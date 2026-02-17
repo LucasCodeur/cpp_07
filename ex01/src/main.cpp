@@ -39,7 +39,7 @@ static void	t_iter_with_int_function(void)
 	{
 		array[i] = i;
 	}
-	iter(array, length, &sumInt);
+	iter(array, length, sumInt);
 	for (int i = 0; i < length; i++)
 	{
 	  std::cout << array[i] << std::endl;
